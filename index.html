@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NASA Image Gallery</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Added OpenSeadragon for DZI support -->
+  <script src="https://cdn.jsdelivr.net/npm/openseadragon@4.1/build/openseadragon/openseadragon.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="title">NASA Image Gallery</h1>
+      <p class="subtitle">Explore the wonders of space</p>
+      
+      <!-- Updated upload section for DZI files -->
+      <div class="upload-section">
+        <label for="dziInput" class="upload-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Add DZI Image
+        </label>
+        <input type="file" id="dziInput" accept=".dzi" style="display: none;">
+        <p class="upload-info">Upload .dzi file (tiles folder must be in the same directory)</p>
+      </div>
+    </header>
+
+    <div class="gallery" id="gallery">
+      <!-- Added data-redirect attribute to first two images for external links -->
+      <div class="gallery-item" data-redirect="page1.html" data-title="Pillars of Creation" data-desc="Click to view activity">
+        <img src="images/pillars-of-creation-thumb.jpg" alt="Pillars of Creation">
+        <div class="gallery-item-info">
+          <h3>Pillars of Creation</h3>
+          <p>Click to access activity</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-redirect="page2.html" data-title="Carina Nebula" data-desc="Click to view activity">
+        <img src="images/carina-nebula-thumb.jpg" alt="Carina Nebula">
+        <div class="gallery-item-info">
+          <h3>Carina Nebula</h3>
+          <p>Click to access activity</p>
+        </div>
+      </div>
+
+      <!-- Regular DZI images without redirect -->
+      <div class="gallery-item" data-dzi="images/sample1/image.dzi" data-title="Southern Ring Nebula" data-desc="Deep zoom image with tiled format">
+        <img src="images/southern-ring-thumb.jpg" alt="Southern Ring Nebula">
+        <div class="gallery-item-info">
+          <h3>Southern Ring Nebula</h3>
+          <p>Click to explore in detail</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-dzi="images/sample2/image.dzi" data-title="Deep Field" data-desc="Deep zoom image with tiled format">
+        <img src="images/deep-field-thumb.jpg" alt="Deep Field">
+        <div class="gallery-item-info">
+          <h3>Deep Field</h3>
+          <p>Click to explore in detail</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Updated viewer modal for OpenSeadragon -->
+  <div class="viewer-modal" id="viewerModal">
+    <div class="viewer-header">
+      <div class="viewer-info">
+        <h2 id="viewerTitle"></h2>
+        <p id="viewerDesc"></p>
+      </div>
+      <button class="close-btn" id="closeBtn" aria-label="Close viewer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- OpenSeadragon container instead of simple image -->
+    <div class="viewer-container" id="viewerContainer"></div>
+    
+    <div class="viewer-instructions">
+      <p>🖱️ Drag to pan • Scroll to zoom • Double-click to zoom in</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

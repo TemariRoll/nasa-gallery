@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #141824;
+  --bg-tertiary: #1a1f2e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a8b8;
+  --accent-blue: #4a90e2;
+  --accent-purple: #8b5cf6;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+/* Viewer Modal */
+.viewer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+}
+
+.viewer-modal.active {
+  display: flex;
+}
+
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.viewer-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.viewer-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Updated viewer container for OpenSeadragon */
+.viewer-container {
+  flex: 1;
+  position: relative;
+  background: #000;
+}
+
+/* Added instructions styling */
+.viewer-instructions {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 24, 36, 0.9);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.viewer-instructions p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Added styles for upload section */
+.upload-section {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: var(--text-primary);
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}
+
+.upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.upload-info {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.2);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item-info {
+  padding: 1rem;
+}
+
+.gallery-item-info h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.gallery-item-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .viewer-header {
+    padding: 1rem;
+  }
+
+  .viewer-info h2 {
+    font-size: 1.25rem;
+  }
+}
