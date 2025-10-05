@@ -75,8 +75,6 @@ convert your-image.tiff -define dzi:tile-size=256 output.dzi
 - Chrome/Edge (recommended)
 - Firefox
 - Safari
-- Mobile browsers
 
-## Credits
 
-Built with [OpenSeadragon](https://openseadragon.github.io/) - the leading web-based viewer for high-resolution zoomable images.
+
