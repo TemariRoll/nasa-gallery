@@ -12,7 +12,6 @@ const nasaImages = [
     description: "Webb Space Telescope captures the iconic Pillars of Creation",
     src: "/pillars-of-creation-nebula-space.jpg",
     thumbnail: "/pillars-of-creation-nebula-space-thumbnail.jpg",
-    // Add the external URL for this specific item
     externalUrl: "https://pub-6408cffb5b2841e69181c7d05d188d0f.r2.dev/index.html",
   },
   {
@@ -21,6 +20,7 @@ const nasaImages = [
     description: "Let´s see if you recognize the surfasces",
     src: "/carina-nebula-cosmic-cliffs-space.jpg",
     thumbnail: "/carina-nebula-cosmic-cliffs-space-thumbnail.jpg",
+    externalUrl: "https://pub-6408cffb5b2841e69181c7d05d188d0f.r2.dev/index.html",
   },
   {
     id: 3,
@@ -72,51 +72,36 @@ export function ImageGallery() {
 
       {/* Gallery Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {nasaImages.map((image) => {
-          // Define the card's content to avoid repetition
-          const CardContent = (
-            <>
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={image.thumbnail || "/placeholder.svg"}
-                  alt={image.title}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              </div>
-              <div className="p-4">
-                <h3 className="mb-1 font-sans text-lg font-semibold text-card-foreground">{image.title}</h3>
-                <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{image.description}</p>
-              </div>
-            </>
-          )
-
-          // Conditionally render an <a> tag for "The Moon" or a regular Card for others
-          if (image.title === "The Moon" && image.externalUrl) {
-            return (
-              <a
-                key={image.id}
-                href={image.externalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Card className="group overflow-hidden border-border bg-card transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/20">
-                  {CardContent}
-                </Card>
-              </a>
-            )
-          }
-
-          return (
-            <Card
-              key={image.id}
-              className="group cursor-pointer overflow-hidden border-border bg-card transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/20"
-              onClick={() => setSelectedImage(image)}
-            >
-              {CardContent}
-            </Card>
-          )
-        })}
+        {nasaImages.map((image) => (
+          <Card
+            key={image.id}
+            className="group cursor-pointer overflow-hidden border-border bg-card transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/20"
+            // --- CAMBIO CLAVE ---
+            // La lógica ahora está aquí y funciona para CUALQUIER imagen con un enlace externo.
+            onClick={() => {
+              if (image.externalUrl) {
+                // Si hay un enlace, ábrelo en una nueva pestaña
+                window.open(image.externalUrl, "_blank", "noopener,noreferrer")
+              } else {
+                // Si no hay enlace, abre el visor de imágenes
+                setSelectedImage(image)
+              }
+            }}
+          >
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <img
+                src={image.thumbnail || "/placeholder.svg"}
+                alt={image.title}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            </div>
+            <div className="p-4">
+              <h3 className="mb-1 font-sans text-lg font-semibold text-card-foreground">{image.title}</h3>
+              <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{image.description}</p>
+            </div>
+          </Card>
+        ))}
       </div>
 
       {/* Image Viewer Modal */}
